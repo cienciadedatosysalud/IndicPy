@@ -16,7 +16,7 @@ stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](http
 
 ``` py
 import pandas as pd
-import IndicPy
+from IndicPy import RuleEngine, MatchAnyWhere, run_indicators
 
 hosp_dataframe = pd.DataFrame({
   "episode_id": [1, 2, 3],
