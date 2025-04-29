@@ -76,7 +76,7 @@ GitHub Repository
 
 You can find the source code on GitHub:
 
-`🚀 IndicPy on GitHub <https://github.com/usuario/IndicPy>`_
+`🚀 IndicPy on GitHub <https://github.com/cienciadedatosysalud/IndicPy>`_
 
 
 IndicPy for R
