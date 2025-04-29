@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "indicpy"
+version = "0.1.0"
+description = ""
+authors = ["Javier González-Galindo <jgonzalezga.iacs@aragon.es>",
+    "Francisco Estupiñan-Romero <festupinnan.iacs@aragon.es>",
+    "Santiago Royo-Sierra <sroyo.iacs@aragon.es>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+duckdb = "^1.2.2"
+pandas = "^2.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
