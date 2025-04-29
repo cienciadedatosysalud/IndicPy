@@ -172,6 +172,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -293,8 +297,432 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="indicpy-package">
-<h1>IndicPy package<a class="headerlink" href="#indicpy-package" title="Link to this heading">#</a></h1>
+  <section id="module-IndicPy">
+<span id="indicpy-package"></span><h1>IndicPy package<a class="headerlink" href="#module-IndicPy" title="Link to this heading">#</a></h1>
+<p><strong>IndicPy</strong> is a lightweight, fast, and intuitive package for indicator calculations in healthcare.</p>
+<p>IndicPy provides the four most commonly used logics for health data indicator calculations:</p>
+<ul class="simple">
+<li><p><strong>MatchAny</strong></p></li>
+<li><p><strong>MatchAll</strong></p></li>
+<li><p><strong>MatchAnyWhere</strong></p></li>
+<li><p><strong>MatchAllWhere</strong></p></li>
+</ul>
+<p>Additionally, it offers a fifth logic, <strong>CustomMatch</strong>, which allows combining these logics with patient-related or episode-based rules.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="IndicPy.CustomMatch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">IndicPy.</span></span><span class="sig-name descname"><span class="pre">CustomMatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indicator_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_logic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#IndicPy.CustomMatch" title="Link to this definition">#</a></dt>
+<dd><p>A class that creates a custom SQL indicator based on user-defined logic, allowing
+for flexible evaluation of conditions within a dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indicator_name</strong> (<em>str</em>) – A string representing the name of the indicator.</p></li>
+<li><p><strong>sql_logic</strong> (<em>str</em>) – A string containing the custom SQL logic to be applied for evaluation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the CustomMatch class with the generated SQL query.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#IndicPy.CustomMatch" title="IndicPy.CustomMatch">CustomMatch</a></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Details:</dt><dd><p>When a <cite>CustomMatch</cite> indicator depends on another previously calculated indicator,
+the required indicator must appear before the <cite>CustomMatch</cite> in the list of
+indicators provided to the <cite>RuleEngine</cite>.
+Additionally, the user must ensure that all variables referenced in the <cite>CustomMatch</cite>
+are present in the data frame.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">IndicPy</span><span class="w"> </span><span class="kn">import</span> <span class="n">RuleEngine</span><span class="p">,</span> <span class="n">MatchAny</span><span class="p">,</span> <span class="n">CustomMatch</span><span class="p">,</span> <span class="n">run_indicators</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hosp_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;episode_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;sex&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;I20&quot;</span><span class="p">,</span> <span class="s2">&quot;I60&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;E11&quot;</span><span class="p">,</span> <span class="s2">&quot;J45&quot;</span><span class="p">,</span> <span class="s2">&quot;I25&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;I60&quot;</span><span class="p">,</span> <span class="s2">&quot;K35&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reng</span> <span class="o">=</span> <span class="n">RuleEngine</span><span class="p">(</span><span class="n">hosp_dataframe</span><span class="p">,</span> <span class="s2">&quot;episode_id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;diagnosis1&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">definition_codes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.11&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.121&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol_indicator</span> <span class="o">=</span> <span class="n">MatchAll</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;alcohol_i&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">target_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">definition_codes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">custom_alcohol_indicator</span> <span class="o">=</span> <span class="n">CustomMatch</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;alcohol_i_plus40&quot;</span><span class="p">,</span>  <span class="c1"># Name of the indicator</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;alcohol_i AND age &gt;= 40&quot;</span>  <span class="c1"># Logic of the indicator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indicators_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">alcohol_indicator</span><span class="p">,</span> <span class="n">custom_alcohol_indicator</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run_indicators</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">indicators_list</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">append_results</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">csv_path</span><span class="o">=</span><span class="s2">&quot;./results.csv&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<p>Explore all the logical operators you can use in DuckDB:
+<a class="reference external" href="https://duckdb.org/docs/stable/sql/query_syntax/where">https://duckdb.org/docs/stable/sql/query_syntax/where</a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="IndicPy.MatchAll">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">IndicPy.</span></span><span class="sig-name descname"><span class="pre">MatchAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_engine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indicator_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">definition_codes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex_prefix_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#IndicPy.MatchAll" title="Link to this definition">#</a></dt>
+<dd><p>A class that creates an SQL indicator to evaluate whether all of the target
+columns match the specified definition codes. The indicator returns <cite>TRUE</cite> only
+if every target column has a match.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule_engine</strong> (<a class="reference internal" href="#IndicPy.RuleEngine" title="IndicPy.RuleEngine"><em>RuleEngine</em></a>) – The rule engine containing the dataset where indicators will be applied.</p></li>
+<li><p><strong>indicator_name</strong> (<em>str</em>) – A string representing the name of the indicator.</p></li>
+<li><p><strong>target_columns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Column names where the match is evaluated. Searches are performed across all target columns.</p></li>
+<li><p><strong>definition_codes</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A set of codes used to define the matching criteria for the target columns.</p></li>
+<li><p><strong>regex_prefix_search</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicates whether to perform prefix-based regex matches (<cite>True</cite>) or exact matches (<cite>False</cite>).
+Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hosp_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;episode_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;I20&quot;</span><span class="p">,</span> <span class="s2">&quot;I60&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;E11&quot;</span><span class="p">,</span> <span class="s2">&quot;J45&quot;</span><span class="p">,</span> <span class="s2">&quot;I25&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;I60&quot;</span><span class="p">,</span> <span class="s2">&quot;K35&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reng</span> <span class="o">=</span> <span class="n">RuleEngine</span><span class="p">(</span><span class="n">hosp_dataframe</span><span class="p">,</span> <span class="s2">&quot;episode_id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;diagnosis1&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">definition_codes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.11&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.121&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol_indicator</span> <span class="o">=</span> <span class="n">MatchAll</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;alcohol_i&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">target_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">definition_codes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Include the indicators in a list and apply them</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indicators_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">alcohol_indicator</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">run_indicators</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">indicators_list</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">append_results</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the MatchAll class with the generated SQL rule.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#IndicPy.MatchAll" title="IndicPy.MatchAll">MatchAll</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="IndicPy.MatchAllWhere">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">IndicPy.</span></span><span class="sig-name descname"><span class="pre">MatchAllWhere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_engine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indicator_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">definition_codes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookup_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex_prefix_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#IndicPy.MatchAllWhere" title="Link to this definition">#</a></dt>
+<dd><p>A class that creates an SQL indicator to evaluate whether all of the target
+columns match the specified definition codes under the conditions defined by the
+filter columns and lookup values.</p>
+<p>Matching is applied only to the target columns that are in the same order as
+the filter columns and satisfy the conditions in lookup values. The indicator
+returns <cite>TRUE</cite> only if every such target column satisfies the matching criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule_engine</strong> (<a class="reference internal" href="#IndicPy.RuleEngine" title="IndicPy.RuleEngine"><em>RuleEngine</em></a>) – The rule engine containing the dataset where the indicators will be applied.</p></li>
+<li><p><strong>indicator_name</strong> (<em>str</em>) – A string representing the name of the indicator.</p></li>
+<li><p><strong>target_columns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Column names where the values from <cite>definition_codes</cite> will be searched.</p></li>
+<li><p><strong>definition_codes</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A set of codes used to define the matching criteria for <cite>target_columns</cite>.</p></li>
+<li><p><strong>filter_columns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Column names that define the conditions under which the <cite>lookup_values</cite> must hold.</p></li>
+<li><p><strong>lookup_values</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of values used to define conditions linked to <cite>filter_columns</cite>.</p></li>
+<li><p><strong>regex_prefix_search</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicates whether to use regex-based prefix searches (<cite>True</cite>) or exact matches (<cite>False</cite>).
+Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the MatchAllWhere class with the generated SQL query.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#IndicPy.MatchAllWhere" title="IndicPy.MatchAllWhere">MatchAllWhere</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hosp_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;episode_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;I20&quot;</span><span class="p">,</span> <span class="s2">&quot;I60&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;E11&quot;</span><span class="p">,</span> <span class="s2">&quot;J45&quot;</span><span class="p">,</span> <span class="s2">&quot;I25&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;I60&quot;</span><span class="p">,</span> <span class="s2">&quot;K35&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;present_on_admission_d1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;present_on_admission_d2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;present_on_admission_d3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reng</span> <span class="o">=</span> <span class="n">RuleEngine</span><span class="p">(</span><span class="n">hosp_dataframe</span><span class="p">,</span> <span class="s2">&quot;episode_id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;diagnosis2&quot;</span><span class="p">,</span> <span class="s2">&quot;diagnosis3&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">definition_codes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.11&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.121&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filter_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;present_on_admission_d2&quot;</span><span class="p">,</span> <span class="s2">&quot;present_on_admission_d3&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup_values</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span> <span class="s2">&quot;True&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol_indicator_poa</span> <span class="o">=</span> <span class="n">MatchAllWhere</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;alcohol_i_poa&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">target_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">definition_codes</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">filter_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">lookup_values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol_i_regex_poa</span> <span class="o">=</span> <span class="n">MatchAllWhere</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;alcohol_i_regex_poa&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">target_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">[</span><span class="s2">&quot;F10&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">filter_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">lookup_values</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">regex_prefix_search</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Include the indicators in a list and apply them</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indicators_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">alcohol_indicator_poa</span><span class="p">,</span> <span class="n">alcohol_i_regex_poa</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">run_indicators</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">indicators_list</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">append_results</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>DuckDB Query Syntax: <a class="reference external" href="https://duckdb.org/docs/stable/sql/query_syntax/where">https://duckdb.org/docs/stable/sql/query_syntax/where</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="IndicPy.MatchAny">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">IndicPy.</span></span><span class="sig-name descname"><span class="pre">MatchAny</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_engine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indicator_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">definition_codes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex_prefix_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#IndicPy.MatchAny" title="Link to this definition">#</a></dt>
+<dd><p>A class that creates an SQL indicator to evaluate whether any of the target
+columns match the specified definition codes. The indicator returns <cite>TRUE</cite> if
+at least one match occurs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule_engine</strong> (<a class="reference internal" href="#IndicPy.RuleEngine" title="IndicPy.RuleEngine"><em>RuleEngine</em></a>) – The rule engine containing the dataset where indicators will be applied.</p></li>
+<li><p><strong>indicator_name</strong> (<em>str</em>) – A string representing the name of the indicator.</p></li>
+<li><p><strong>target_columns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Column names where the match is evaluated. Searches are performed across all target columns.</p></li>
+<li><p><strong>definition_codes</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A set of codes used to define the matching criteria for the target columns.</p></li>
+<li><p><strong>regex_prefix_search</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicates whether to perform prefix-based regex matches (<cite>True</cite>) or exact matches (<cite>False</cite>).
+Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hosp_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;episode_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;I20&quot;</span><span class="p">,</span> <span class="s2">&quot;I60&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;E11&quot;</span><span class="p">,</span> <span class="s2">&quot;J45&quot;</span><span class="p">,</span> <span class="s2">&quot;I25&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;I60&quot;</span><span class="p">,</span> <span class="s2">&quot;K35&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;diagnosis1&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">definition_codes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.11&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.121&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol_indicator</span> <span class="o">=</span> <span class="n">MatchAny</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;alcohol_i&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">target_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">definition_codes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the MatchAny class with the generated SQL rule.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#IndicPy.MatchAny" title="IndicPy.MatchAny">MatchAny</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="IndicPy.MatchAnyWhere">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">IndicPy.</span></span><span class="sig-name descname"><span class="pre">MatchAnyWhere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_engine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indicator_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">definition_codes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lookup_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex_prefix_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#IndicPy.MatchAnyWhere" title="Link to this definition">#</a></dt>
+<dd><p>A class that creates an SQL indicator to evaluate whether any of the target
+columns match the specified definition codes under the conditions defined by the
+filter columns and lookup values. The matching is applied only to the target columns
+that are in the same order as the filter columns and satisfy the conditions
+in lookup values. The indicator returns <cite>TRUE</cite> if at least one target column
+satisfies the matching criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule_engine</strong> (<a class="reference internal" href="#IndicPy.RuleEngine" title="IndicPy.RuleEngine"><em>RuleEngine</em></a>) – The rule engine containing the dataset where the indicators will be applied.</p></li>
+<li><p><strong>indicator_name</strong> (<em>str</em>) – A string representing the name of the indicator.</p></li>
+<li><p><strong>target_columns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Column names where the values from <cite>definition_codes</cite> will be searched.</p></li>
+<li><p><strong>definition_codes</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A set of codes used to define the matching criteria applied to <cite>target_columns</cite>.</p></li>
+<li><p><strong>filter_columns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Column names that define the conditions under which the <cite>lookup_values</cite> must hold.</p></li>
+<li><p><strong>lookup_values</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of values used to define logical conditions linked to <cite>filter_columns</cite>.</p></li>
+<li><p><strong>regex_prefix_search</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicates whether to use regex-based prefix searches (<cite>True</cite>) or exact matches (<cite>False</cite>).
+Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hosp_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;episode_id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;I20&quot;</span><span class="p">,</span> <span class="s2">&quot;I60&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;E11&quot;</span><span class="p">,</span> <span class="s2">&quot;J45&quot;</span><span class="p">,</span> <span class="s2">&quot;I25&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;diagnosis3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;I60&quot;</span><span class="p">,</span> <span class="s2">&quot;K35&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;present_on_admission_d1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;present_on_admission_d2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;present_on_admission_d3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reng</span> <span class="o">=</span> <span class="n">RuleEngine</span><span class="p">(</span><span class="n">hosp_dataframe</span><span class="p">,</span> <span class="s2">&quot;episode_id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;diagnosis2&quot;</span><span class="p">,</span> <span class="s2">&quot;diagnosis3&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">definition_codes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.11&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.121&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filter_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;present_on_admission_d2&quot;</span><span class="p">,</span> <span class="s2">&quot;present_on_admission_d3&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup_values</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span> <span class="s2">&quot;True&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol_indicator_poa</span> <span class="o">=</span> <span class="n">MatchAnyWhere</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;alcohol_i_poa&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">target_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">definition_codes</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">filter_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">lookup_values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol_i_regex_poa</span> <span class="o">=</span> <span class="n">MatchAnyWhere</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;alcohol_i_regex_poa&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">target_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">[</span><span class="s2">&quot;F10&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">filter_columns</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">lookup_values</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">regex_prefix_search</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Include the indicators in a list and apply them</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indicators_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">alcohol_indicator_poa</span><span class="p">,</span> <span class="n">alcohol_i_regex_poa</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run_indicators</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">reng</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">indicators_list</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">append_results</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">csv_path</span><span class="o">=</span><span class="s2">&quot;./results.csv&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the MatchAnyWhere class with the generated SQL rule.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#IndicPy.MatchAnyWhere" title="IndicPy.MatchAnyWhere">MatchAnyWhere</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="IndicPy.RuleEngine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">IndicPy.</span></span><span class="sig-name descname"><span class="pre">RuleEngine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_identifier_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">':memory:'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#IndicPy.RuleEngine" title="Link to this definition">#</a></dt>
+<dd><p>This class facilitates the processing and evaluation of indicators on a dataset by leveraging a database engine.
+It is designed to work with data frames and ensures efficient handling of operations, including validation of
+unique identifiers and saving results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Data frame object in which you want to process the indicators.</p></li>
+<li><p><strong>unique_identifier_column</strong> (<em>str</em>) – Name of the column containing unique identifiers for the provided dataframe
+(there can be no repeated values in this column).</p></li>
+<li><p><strong>database_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path where you want to save the database needed to calculate the indicators.
+Defaults to “:memory:” (in memory).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reng</span> <span class="o">=</span> <span class="n">RuleEngine</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;hospitalization_id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset2.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reng2</span> <span class="o">=</span> <span class="n">RuleEngine</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="s2">&quot;episode_id&quot;</span><span class="p">,</span> <span class="s2">&quot;./indicators.duckdb&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the RuleEngine class.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#IndicPy.RuleEngine" title="IndicPy.RuleEngine">RuleEngine</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="IndicPy.run_indicators">
+<span class="sig-prename descclassname"><span class="pre">IndicPy.</span></span><span class="sig-name descname"><span class="pre">run_indicators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_engine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indicators_rules</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_true_indicators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_parquet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#IndicPy.run_indicators" title="Link to this definition">#</a></dt>
+<dd><p>Executes the specified indicator rules using the given RuleEngine object and provides options for output customization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule_engine</strong> (<a class="reference internal" href="#IndicPy.RuleEngine" title="IndicPy.RuleEngine"><em>RuleEngine</em></a>) – The RuleEngine object used to apply the indicator rules on the associated dataset.</p></li>
+<li><p><strong>indicators_rules</strong> (<em>list</em><em>[</em><em>SqlRuleIndicator</em><em>]</em>) – List of objects of class <cite>SqlRuleIndicator</cite> (MatchAny, MatchAll, MatchAnyWhere, MatchAllWhere, CustomMatch).
+Each object represents an indicator rule to be applied.</p></li>
+<li><p><strong>only_true_indicators</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <cite>True</cite>, the function returns only the records that meet at least one of the indicators. Defaults to <cite>True</cite>.</p></li>
+<li><p><strong>append_results</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <cite>True</cite>, the function returns the original dataset along with the indicators.
+If <cite>False</cite>, only the <cite>unique_identifier_column</cite> and the indicator results are returned. Defaults to <cite>False</cite>.</p></li>
+<li><p><strong>to_csv</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to save the results as a CSV file. If <cite>None</cite>, no CSV file is created. Defaults to <cite>None</cite>.</p></li>
+<li><p><strong>to_parquet</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to save the results as a parquet file format with gzip compression. Defaults to <cite>None</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>If <cite>only_true_indicators=True</cite>, only the records matching at least one indicator are returned.</p></li>
+<li><p>If <cite>append_results=True</cite>, the full dataset with appended indicators is returned.</p></li>
+<li><p>If <cite>append_results=False</cite>, only the <cite>unique_identifier_column</cite> and the indicator results are returned.</p></li>
+<li><p>If <cite>to_csv</cite> or <cite>to_parquet</cite> is specified, the results are saved to the respective file format.</p></li>
+<li><p>If both <cite>to_csv</cite> and <cite>to_parquet</cite> are <cite>None</cite>, the results are returned as a DataFrame.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Depends on the parameter values</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rule_engine</span> <span class="o">=</span> <span class="n">RuleEngine</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;hospitalization_id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;diagnosis1&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">definition_codes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F10.10&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.11&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.120&quot;</span><span class="p">,</span> <span class="s2">&quot;F10.121&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol_indicator</span> <span class="o">=</span> <span class="n">MatchAny</span><span class="p">(</span><span class="n">rule_engine</span><span class="p">,</span> <span class="s2">&quot;alcohol_i&quot;</span><span class="p">,</span> <span class="n">target_columns</span><span class="p">,</span> <span class="n">definition_codes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indicators_rules</span> <span class="o">=</span> <span class="p">[</span><span class="n">alcohol_indicator</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Option return data frame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">run_indicators</span><span class="p">(</span><span class="n">rule_engine</span><span class="p">,</span> <span class="n">indicators_rules</span><span class="p">,</span> <span class="n">only_true_indicators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append_results</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Option save to CSV file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run_indicators</span><span class="p">(</span><span class="n">rule_engine</span><span class="p">,</span> <span class="n">indicators_rules</span><span class="p">,</span> <span class="n">only_true_indicators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append_results</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">to_csv</span><span class="o">=</span><span class="s2">&quot;output.csv&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Option save to Parquet file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run_indicators</span><span class="p">(</span><span class="n">rule_engine</span><span class="p">,</span> <span class="n">indicators_rules</span><span class="p">,</span> <span class="n">only_true_indicators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append_results</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">to_parquet</span><span class="o">=</span><span class="s2">&quot;output.parquet&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – If any invalid object is passed in <cite>indicators_rules</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -322,6 +750,30 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#IndicPy.CustomMatch"><code class="docutils literal notranslate"><span class="pre">CustomMatch</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#IndicPy.MatchAll"><code class="docutils literal notranslate"><span class="pre">MatchAll</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#IndicPy.MatchAllWhere"><code class="docutils literal notranslate"><span class="pre">MatchAllWhere</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#IndicPy.MatchAny"><code class="docutils literal notranslate"><span class="pre">MatchAny</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#IndicPy.MatchAnyWhere"><code class="docutils literal notranslate"><span class="pre">MatchAnyWhere</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#IndicPy.RuleEngine"><code class="docutils literal notranslate"><span class="pre">RuleEngine</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#IndicPy.run_indicators"><code class="docutils literal notranslate"><span class="pre">run_indicators()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
