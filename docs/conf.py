@@ -9,7 +9,7 @@ import os
 import sys
 
 # Agrega la ruta del paquete
-sys.path.insert(0, os.path.abspath('../../IndicPy'))  # Ajusta si tu paquete está en otro nivel
+sys.path.insert(0, os.path.abspath('../'))  # Ajusta si tu paquete está en otro nivel
 
 html_title = "IndicPy Documentation"
 project = 'IndicPy'
