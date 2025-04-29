@@ -7,10 +7,6 @@ authors = ["Javier González-Galindo <jgonzalezga.iacs@aragon.es>",
     "Santiago Royo-Sierra <sroyo.iacs@aragon.es>"]
 readme = "README.md"
 
-packages = [
-    { include = "indicpy", from = "IndicPy" }
-]
-
 [tool.poetry.dependencies]
 python = "^3.9"
 duckdb = "^1.2.2"
