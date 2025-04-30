@@ -19,9 +19,9 @@ class RuleEngine:
             Defaults to ":memory:" (in memory).
 
     Examples:
-        >>> df = pd.read_csv("dataset.csv", sep="|", header=0)
+        >>> df = pd.read_csv("dataset.csv", sep="|")
         >>> reng = RuleEngine(df, "hospitalization_id")
-        >>> df2 = pd.read_csv("dataset2.csv", sep="|", header=0)
+        >>> df2 = pd.read_csv("dataset2.csv", sep="|")
         >>> reng2 = RuleEngine(df2, "episode_id", "./indicators.duckdb")
 
     Returns:
@@ -142,7 +142,7 @@ def run_indicators(rule_engine, indicators_rules, only_true_indicators=True, app
         - If both `to_csv` and `to_parquet` are `None`, the results are returned as a DataFrame.
 
     Examples:
-        >>> df = pd.read_csv("dataset.csv", sep="|", header=0)
+        >>> df = pd.read_csv("dataset.csv", sep="|")
         >>> rule_engine = RuleEngine(df, "hospitalization_id")
         >>> target_columns = ["diagnosis1"]
         >>> definition_codes = ["F10.10", "F10.11", "F10.120", "F10.121"]
