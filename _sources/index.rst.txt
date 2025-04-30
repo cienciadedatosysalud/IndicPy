@@ -6,7 +6,7 @@
 IndicPy
 =====================
 
-**IndicPy** is a Lightweight, Fast, and Intuitive Indicator Calculations Package for Health.
+**IndicPy** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library for Health.
 
 .. toctree::
    :maxdepth: 2
