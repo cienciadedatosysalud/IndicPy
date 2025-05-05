@@ -7,6 +7,8 @@ version](https://img.shields.io/badge/GitHub-0.1.2-blue)](https://github.com/cie
 [![Codecov test coverage](https://codecov.io/gh/cienciadedatosysalud/IndicPy4Health/graph/badge.svg)](https://app.codecov.io/gh/cienciadedatosysalud/IndicPy4Health)
 [![Lifecycle:
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable/)
+[![DOI](https://zenodo.org/badge/974787529.svg)](https://doi.org/10.5281/zenodo.15343177)
+
 <!-- badges: end -->
 
 **IndicPy4Health** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library from Health data.
