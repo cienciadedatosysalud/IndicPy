@@ -15,3 +15,7 @@ pandas = "^2.2.3"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+packages = [
+    {include = "IndicPy"}
+]
