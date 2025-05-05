@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "IndicPy"
+name = "indicpy"
 version = "0.1.2"
 description = "IndicPy is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library from Health data."
 authors = ["Javier González-Galindo <jgonzalezga.iacs@aragon.es>",
@@ -15,7 +15,3 @@ pandas = "^2.2.3"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-packages = [
-    {include = "IndicPy"}
-]
