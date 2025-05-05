@@ -6,7 +6,7 @@
 IndicPy
 =====================
 
-**IndicPy** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library for Health.
+**IndicPy** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library from Health data.
 
 .. toctree::
    :maxdepth: 2
@@ -82,7 +82,9 @@ You can find the source code on GitHub:
 Indicator Builder
 =================
 
-Effortlessly generate indicator calculation script templates using `IndicatorBuilder`_. This web tool reads your CSV file, where each column represents an indicator along with its respective definition codes, and outputs a script template ready to be copied and used in R or Python. Streamline your data analysis workflow with IndicatorBuilder.
+Effortlessly generate indicator calculation script templates using `IndicatorBuilder`_. This web tool reads a CSV file, where each column represents an indicator by including its respective definition codes, and outputs a script template ready to be copied and used in R or Python. You can streamline your data analysis workflow with 'IndicatorBuilder'.
+ 
+The use of 'IndicatorBuilder' complements the Python library `IndicPy`_ and the R package `IndicR`_, providing a easy-to-use tool scripting the definition of any indicator within your preferred programming environment.
 
 
 IndicPy for R
@@ -95,6 +97,7 @@ You can find and use IndicR in its official repository:
 `🚀 IndicR on GitHub <https://github.com/cienciadedatosysalud/IndicR>`_
 
 .. _IndicR: https://cienciadedatosysalud.github.io/IndicR/
+.. _IndicPy: https://cienciadedatosysalud.github.io/IndicPy/#
 .. _IndicatorBuilder: https://cienciadedatosysalud.github.io/IndicatorBuilder/
 
 
