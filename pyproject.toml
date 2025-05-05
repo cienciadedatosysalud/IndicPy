@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "IndicPy"
-version = "0.1.1"
+version = "0.1.2"
 description = "IndicPy is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library from Health data."
 authors = ["Javier González-Galindo <jgonzalezga.iacs@aragon.es>",
     "Francisco Estupiñan-Romero <festupinnan.iacs@aragon.es>",
