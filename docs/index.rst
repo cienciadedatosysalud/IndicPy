@@ -19,7 +19,7 @@ How to use:
 .. code-block:: python
 
    import pandas as pd
-   import IndicPy4Health
+   import indicpy4health
 
    hosp_dataframe = pd.DataFrame({
       "episode_id": [1, 2, 3],
