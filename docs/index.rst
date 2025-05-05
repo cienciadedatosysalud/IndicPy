@@ -79,6 +79,12 @@ You can find the source code on GitHub:
 `🚀 IndicPy on GitHub <https://github.com/cienciadedatosysalud/IndicPy>`_
 
 
+Indicator Builder
+=================
+
+Effortlessly generate indicator calculation script templates using `IndicatorBuilder`_. This web tool reads your CSV file, where each column represents an indicator along with its respective definition codes, and outputs a script template ready to be copied and used in R or Python. Streamline your data analysis workflow with IndicatorBuilder.
+
+
 IndicPy for R
 =============
 
@@ -89,7 +95,6 @@ You can find and use IndicR in its official repository:
 `🚀 IndicR on GitHub <https://github.com/cienciadedatosysalud/IndicR>`_
 
 .. _IndicR: https://cienciadedatosysalud.github.io/IndicR/
-
-
+.. _IndicatorBuilder: https://cienciadedatosysalud.github.io/IndicatorBuilder/
 
 
