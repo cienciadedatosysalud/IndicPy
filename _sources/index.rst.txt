@@ -84,7 +84,7 @@ Indicator Builder
 
 Effortlessly generate indicator calculation script templates using `IndicatorBuilder`_. This web tool reads a CSV file, where each column represents an indicator by including its respective definition codes, and outputs a script template ready to be copied and used in R or Python. You can streamline your data analysis workflow with 'IndicatorBuilder'.
  
-The use of 'IndicatorBuilder' complements the Python library `IndicPy`_ and the R package `IndicR`_, providing a easy-to-use tool scripting the definition of any indicator within your preferred programming environment.
+The use of 'IndicatorBuilder' complements the Python library `IndicPy`_ and the R package `IndicR`_, providing an easy-to-use tool scripting the definition of any indicator within your preferred programming environment.
 
 
 IndicPy for R
