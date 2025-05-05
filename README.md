@@ -9,7 +9,7 @@ version](https://img.shields.io/badge/GitHub-0.1.0-blue)](https://github.com/cie
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable/)
 <!-- badges: end -->
 
-**IndicPy** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library for Health.
+**IndicPy** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library from Health data.
 
 
 ## Example
