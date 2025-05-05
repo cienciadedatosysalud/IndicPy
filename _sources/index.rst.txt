@@ -1,12 +1,12 @@
-.. IndicPy documentation master file, created by
+.. IndicPy4Health documentation master file, created by
    sphinx-quickstart on Mon Apr 28 10:32:09 2025.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-IndicPy
+IndicPy4Health
 =====================
 
-**IndicPy** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library from Health data.
+**IndicPy4Health** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library from Health data.
 
 .. toctree::
    :maxdepth: 2
@@ -19,7 +19,7 @@ How to use:
 .. code-block:: python
 
    import pandas as pd
-   import IndicPy
+   import IndicPy4Health
 
    hosp_dataframe = pd.DataFrame({
       "episode_id": [1, 2, 3],
@@ -76,7 +76,7 @@ GitHub Repository
 
 You can find the source code on GitHub:
 
-`🚀 IndicPy on GitHub <https://github.com/cienciadedatosysalud/IndicPy>`_
+`🚀 IndicPy4Health on GitHub <https://github.com/cienciadedatosysalud/IndicPy4Health>`_
 
 
 Indicator Builder
@@ -84,20 +84,20 @@ Indicator Builder
 
 Effortlessly generate indicator calculation script templates using `IndicatorBuilder`_. This web tool reads a CSV file, where each column represents an indicator by including its respective definition codes, and outputs a script template ready to be copied and used in R or Python. You can streamline your data analysis workflow with 'IndicatorBuilder'.
  
-The use of 'IndicatorBuilder' complements the Python library `IndicPy`_ and the R package `IndicR`_, providing an easy-to-use tool scripting the definition of any indicator within your preferred programming environment.
+The use of 'IndicatorBuilder' complements the Python library `IndicPy4Health`_ and the R package `IndicR`_, providing an easy-to-use tool scripting the definition of any indicator within your preferred programming environment.
 
 
-IndicPy for R
+IndicPy4Health for R
 =============
 
-IndicPy is also available for **R** under the name `IndicR`_, offering similar functionality for processing data.
+IndicPy4Health is also available for **R** under the name `IndicR`_, offering similar functionality for processing data.
 
 You can find and use IndicR in its official repository:
 
 `🚀 IndicR on GitHub <https://github.com/cienciadedatosysalud/IndicR>`_
 
 .. _IndicR: https://cienciadedatosysalud.github.io/IndicR/
-.. _IndicPy: https://cienciadedatosysalud.github.io/IndicPy/#
+.. _IndicPy4Health: https://cienciadedatosysalud.github.io/IndicPy4Health/#
 .. _IndicatorBuilder: https://cienciadedatosysalud.github.io/IndicatorBuilder/
 
 
