@@ -1,6 +1,6 @@
 import unittest
 import pandas as pd
-from IndicPy import RuleEngine, MatchAllWhere, run_indicators
+from indicpy4health import RuleEngine, MatchAllWhere, run_indicators
 
 class TestMatchAllWhere(unittest.TestCase):
     def setUp(self):

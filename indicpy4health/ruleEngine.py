@@ -853,7 +853,7 @@ class CustomMatch(SqlRuleIndicator):
 
     Examples:
         >>> import pandas as pd
-        >>> from IndicPy import RuleEngine, MatchAny, CustomMatch, run_indicators
+        >>> from indicpy4health import RuleEngine, MatchAny, CustomMatch, run_indicators
         >>> hosp_dataframe = pd.DataFrame({
         >>>     "episode_id": [1, 2, 3],
         >>>     "age": [45, 60, 32],

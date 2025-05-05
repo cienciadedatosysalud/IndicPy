@@ -1,6 +1,6 @@
 import unittest
 import pandas as pd
-from IndicPy import RuleEngine, MatchAnyWhere, run_indicators
+from indicpy4health import RuleEngine, MatchAnyWhere, run_indicators
 
 class TestIndicators(unittest.TestCase):
     def setUp(self):

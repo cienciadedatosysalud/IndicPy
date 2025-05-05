@@ -1,7 +1,7 @@
-IndicPy
+IndicPy4Health
 =======
 
 .. toctree::
    :maxdepth: 4
 
-   IndicPy
+   IndicPy4Health

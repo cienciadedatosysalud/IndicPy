@@ -1,4 +1,4 @@
-name: indicpy
+name: IndicPy4Health
 on:
   push:
     tags:

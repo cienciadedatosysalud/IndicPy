@@ -1,22 +1,22 @@
-# IndicPy
+# IndicPy4Health
 
 <!-- [![CRAN
 status](https://www.r-pkg.org/badges/version/)](https://CRAN.R-project.org/package="package"/)-->
 [![GitHub
-version](https://img.shields.io/badge/GitHub-0.1.2-blue)](https://github.com/cienciadedatosysalud/IndicPy)
-[![Codecov test coverage](https://codecov.io/gh/cienciadedatosysalud/IndicPy/graph/badge.svg)](https://app.codecov.io/gh/cienciadedatosysalud/IndicPy)
+version](https://img.shields.io/badge/GitHub-0.1.2-blue)](https://github.com/cienciadedatosysalud/IndicPy4Health)
+[![Codecov test coverage](https://codecov.io/gh/cienciadedatosysalud/IndicPy4Health/graph/badge.svg)](https://app.codecov.io/gh/cienciadedatosysalud/IndicPy4Health)
 [![Lifecycle:
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable/)
 <!-- badges: end -->
 
-**IndicPy** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library from Health data.
+**IndicPy4Health** is a Lightweight, Fast, and Intuitive Indicator Calculations Python Library from Health data.
 
 
 ## Example
 
 ``` py
 import pandas as pd
-from IndicPy import RuleEngine, MatchAnyWhere, run_indicators
+from indicpy4health import RuleEngine, MatchAnyWhere, run_indicators
 
 hosp_dataframe = pd.DataFrame({
   "episode_id": [1, 2, 3],
@@ -73,7 +73,7 @@ run_indicators(self.reng,
 
 Effortlessly generate indicator calculation script templates using 'IndicatorBuilder'. This web tool reads a CSV file, where each column represents an indicator by including its respective definition codes, and outputs a script template ready to be copied and used in R or Python. You can streamline your data analysis workflow with 'IndicatorBuilder'.
  
-The use of 'IndicatorBuilder' complements the Python library [IndicPy](https://cienciadedatosysalud.github.io/IndicPy/#) and the R package [IndicR](https://cienciadedatosysalud.github.io/IndicR/), providing an easy-to-use tool scripting the definition of any indicator within your preferred programming environment.
+The use of 'IndicatorBuilder' complements the Python library [IndicPy4Health](https://cienciadedatosysalud.github.io/IndicPy4Health/#) and the R package [IndicR](https://cienciadedatosysalud.github.io/IndicR/), providing an easy-to-use tool scripting the definition of any indicator within your preferred programming environment.
 
 
 

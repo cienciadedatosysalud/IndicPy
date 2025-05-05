@@ -11,8 +11,8 @@ import sys
 # Agrega la ruta del paquete
 sys.path.insert(0, os.path.abspath('../'))  # Ajusta si tu paquete está en otro nivel
 
-html_title = "IndicPy Documentation"
-project = 'IndicPy'
+html_title = "IndicPy4Health Documentation"
+project = 'IndicPy4Health'
 copyright = '2025, Data Science for Health Services and Policy Research Group- Aragon Institute of Health Sciences'
 author = 'Javier González-Galindo, Francisco Estupiñan-Romero, Santiago Royo-Sierra'
 release = 'HTML'

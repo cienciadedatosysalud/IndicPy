@@ -1,7 +1,7 @@
 r"""
-**IndicPy** is a lightweight, fast, and intuitive package for indicator calculations in healthcare.
+**IndicPy4Health** is a lightweight, fast, and intuitive package for indicator calculations in healthcare.
 
-IndicPy provides the four most commonly used logics for health data indicator calculations:
+IndicPy4Health provides the four most commonly used logics for health data indicator calculations:
 
 - **MatchAny**
 
