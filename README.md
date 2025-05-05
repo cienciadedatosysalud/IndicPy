@@ -3,7 +3,7 @@
 <!-- [![CRAN
 status](https://www.r-pkg.org/badges/version/)](https://CRAN.R-project.org/package="package"/)-->
 [![GitHub
-version](https://img.shields.io/badge/GitHub-0.1.1-blue)](https://github.com/cienciadedatosysalud/IndicPy)
+version](https://img.shields.io/badge/GitHub-0.1.2-blue)](https://github.com/cienciadedatosysalud/IndicPy)
 [![Codecov test coverage](https://codecov.io/gh/cienciadedatosysalud/IndicPy/graph/badge.svg)](https://app.codecov.io/gh/cienciadedatosysalud/IndicPy)
 [![Lifecycle:
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable/)
